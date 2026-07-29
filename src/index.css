@@ -183,3 +183,97 @@ h1, h2, h3, h4 {
 .print-only {
   display: none;
 }
+
+/*
+ * Number worksheet family (0-9) — A4 page shell.
+ * Ink Saving is NOT the blunt `.ink-saving *` override above (that
+ * forces every color to black/white, which reads as a grayscale
+ * screenshot). Instead `WorksheetPage`/`Worksheet0` pass an
+ * `inkSaving` prop down to their own children, which render
+ * deliberately simplified (outline-only) versions of themselves —
+ * see the component files for details.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+}
+.worksheet-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  margin: 0 auto;
+  padding: 10mm;
+  background: #ffffff;
+  color: #1a2036;
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.worksheet-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1.5pt solid #e2e7f0;
+  padding-bottom: 3mm;
+}
+.worksheet-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 13pt;
+  color: #2f6fed;
+}
+.worksheet-a4.worksheet-ink-saving .worksheet-brand {
+  color: #1a2036;
+}
+.worksheet-titles {
+  text-align: right;
+}
+.worksheet-titles h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17pt;
+  margin: 0;
+  line-height: 1.1;
+}
+.worksheet-titles p {
+  font-size: 9pt;
+  color: #2b3350;
+  margin: 1mm 0 0;
+}
+.worksheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  flex: 1;
+  min-height: 0;
+}
+.worksheet-footer {
+  border-top: 1pt solid #e2e7f0;
+  padding-top: 2mm;
+  font-size: 7.5pt;
+  color: #6b7280;
+  text-align: center;
+}
+.worksheet-section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 10pt;
+  color: #2f6fed;
+  margin-bottom: 1.5mm;
+  display: block;
+}
+.worksheet-a4.worksheet-ink-saving .worksheet-section-label {
+  color: #1a2036;
+}
+.worksheet-writing-line {
+  border-bottom: 1pt dashed #9ca3af;
+  height: 14mm;
+}
+.worksheet-writing-line + .worksheet-writing-line {
+  margin-top: 3mm;
+}

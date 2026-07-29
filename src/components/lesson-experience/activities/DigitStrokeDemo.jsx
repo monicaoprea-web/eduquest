@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 
 /**
  * Hand-authored single-stroke paths, keyed by character, tuned to a
- * 0-0-200x200 viewBox. Only "5" is defined for now — add more digits
- * here as future lessons need them; every consumer of this component
- * already handles an unknown character gracefully (falls back to a
- * plain static outline, no animation).
+ * 0-0-200x200 viewBox. Add more digits here as future lessons need
+ * them; every consumer of this component already handles an unknown
+ * character gracefully (falls back to a plain static outline, no
+ * animation, and still calls `onDone` so the lesson isn't stuck).
  */
 const STROKE_PATHS = {
+  0: 'M100 35C127 35 145 65 145 100 145 135 127 165 100 165 73 165 55 135 55 100 55 65 73 35 100 35Z',
   5: 'M138 34H70v56c10-8 24-12 36-9 24 6 34 30 26 50-8 20-32 30-54 22-10-4-18-11-22-20',
 }
 

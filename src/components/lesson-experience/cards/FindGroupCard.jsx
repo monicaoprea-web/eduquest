@@ -7,9 +7,11 @@ import { renderObjectIcon } from '../objectIconRegistry'
 
 /**
  * FindGroupCard
- * Section 5 — "Joc: Găsește grupul": several rounds of picking, among
- * a few groups of different objects, the one that has the requested
- * number of items. No timer, no speed pressure.
+ * "Joc: Găsește grupul": several rounds of picking, among a few groups
+ * of different objects, the one that has the requested number of
+ * items. No timer, no speed pressure. Wrong guesses get a spoken hint
+ * from the second attempt onward (see `round.hintText`, or a sensible
+ * default when the target is 0).
  *
  * @param {{
  *   findGroup: {
@@ -17,6 +19,7 @@ import { renderObjectIcon } from '../objectIconRegistry'
  *     rounds: {
  *       targetCount: number,
  *       groups: { icon: string, count: number }[],
+ *       hintText?: string,
  *     }[],
  *   },
  *   onContinue: () => void,
@@ -37,6 +40,12 @@ export default function FindGroupCard({ findGroup, onContinue }) {
     }
   }
 
+  const prompt = round
+    ? round.targetCount === 0
+      ? 'Găsește grupul gol.'
+      : `Găsește grupul cu ${round.targetCount} obiecte.`
+    : ''
+
   return (
     <LessonCardShell>
       <CardHeading icon="🎯" eyebrow="Joc" title={findGroup.title ?? 'Găsește grupul'} />
@@ -45,7 +54,8 @@ export default function FindGroupCard({ findGroup, onContinue }) {
         <FindGroup
           key={roundIndex}
           targetCount={round.targetCount}
-          prompt={`Găsește grupul cu ${round.targetCount} obiecte.`}
+          prompt={prompt}
+          hintText={round.hintText ?? (round.targetCount === 0 ? 'Privește grupul gol.' : undefined)}
           groups={round.groups.map((g, i) => ({
             id: `${roundIndex}-${i}`,
             count: g.count,

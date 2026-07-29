@@ -4,6 +4,7 @@ import ContinueButton from '../ContinueButton'
 import HandIllustration, { HAND_FINGER_ORDER } from './HandIllustration'
 import { soundEffects } from '../soundEffects'
 import { pickEncouragement } from '../encouragement'
+import { speak } from '../audio'
 
 /**
  * DiscoverCard
@@ -69,6 +70,7 @@ export default function DiscoverCard({ targetCount = 5, onContinue }) {
       setPracticeIndex(nextIndex)
       if (nextIndex >= fingers.length) {
         soundEffects.success()
+        speak({ text: 'Exact!' })
         setTimeout(() => setPhase('done'), 500)
       }
       return
@@ -76,6 +78,7 @@ export default function DiscoverCard({ targetCount = 5, onContinue }) {
 
     const encouragement = pickEncouragement(message)
     showMessage(encouragement)
+    speak({ text: encouragement })
     setShakingFinger(fingerId)
     clearTimeout(shakeTimeout.current)
     shakeTimeout.current = setTimeout(() => setShakingFinger(null), 350)

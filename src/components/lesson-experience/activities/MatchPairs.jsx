@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { soundEffects } from '../soundEffects'
-import { useEncouragementMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 import { AudioInstruction } from '../audio'
 
 /**
@@ -9,22 +9,36 @@ import { AudioInstruction } from '../audio'
  * and its picture, a number and its quantity, a shape and its name...).
  * The child taps one item on the left, then one on the right; a correct
  * pair locks in and both items are marked done. A wrong pair never says
- * "Wrong" — it shows a shared encouragement message and simply
- * deselects, ready to try again.
+ * "Wrong" — spoken + written feedback comes from `useAnswerFeedback`,
+ * and it simply deselects, ready to try again.
  *
  * @param {{
  *   pairs: { id: string, left: string, right: string }[],  Left/right can be text or emoji.
  *   prompt?: string,
  *   audioSrc?: string,
  *   autoPlay?: boolean,
+ *   correctAudio?: string,
+ *   incorrectAudio?: string,
+ *   hintText?: string,
+ *   hintAudio?: string,
  *   onComplete?: () => void,   Called once every pair is matched.
  * }} props
  */
-export default function MatchPairs({ pairs, prompt, audioSrc, autoPlay = true, onComplete }) {
+export default function MatchPairs({
+  pairs,
+  prompt,
+  audioSrc,
+  autoPlay = true,
+  correctAudio,
+  incorrectAudio,
+  hintText,
+  hintAudio,
+  onComplete,
+}) {
   const [matched, setMatched] = useState(() => new Set())
   const [selectedLeft, setSelectedLeft] = useState(null)
   const [shakeIds, setShakeIds] = useState(() => new Set())
-  const [message, triggerEncouragement] = useEncouragementMessage()
+  const { message, markCorrect, markIncorrect } = useAnswerFeedback({ correctAudio, incorrectAudio, hintText, hintAudio })
 
   const rightOrder = useMemo(
     () => [...pairs].sort(() => Math.random() - 0.5),
@@ -48,6 +62,7 @@ export default function MatchPairs({ pairs, prompt, audioSrc, autoPlay = true, o
       const next = new Set(matched).add(id)
       setMatched(next)
       setSelectedLeft(null)
+      markCorrect()
       if (next.size === pairs.length) {
         soundEffects.success()
         onComplete?.()
@@ -55,7 +70,7 @@ export default function MatchPairs({ pairs, prompt, audioSrc, autoPlay = true, o
       return
     }
 
-    triggerEncouragement()
+    markIncorrect()
     setShakeIds(new Set([selectedLeft, id]))
     setTimeout(() => setShakeIds(new Set()), 350)
     setSelectedLeft(null)

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { soundEffects } from '../soundEffects'
-import { useEncouragementMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 import { AudioInstruction } from '../audio'
 
 /**
@@ -10,8 +10,8 @@ import { AudioInstruction } from '../audio'
  * labeled bins. The child taps an item, then taps the bin they think it
  * belongs to — tap-to-place instead of drag-and-drop, so it works
  * equally well with a mouse or a finger. A wrong bin never says
- * "Wrong": the item just gently bounces back to the tray with a shared
- * encouragement message.
+ * "Wrong": spoken + written feedback comes from `useAnswerFeedback`,
+ * and the item just gently bounces back to the tray.
  *
  * @param {{
  *   items: { id: string, icon: string, groupId: string }[],
@@ -19,14 +19,29 @@ import { AudioInstruction } from '../audio'
  *   prompt?: string,
  *   audioSrc?: string,
  *   autoPlay?: boolean,
+ *   correctAudio?: string,
+ *   incorrectAudio?: string,
+ *   hintText?: string,
+ *   hintAudio?: string,
  *   onComplete?: () => void,   Called once every item is correctly sorted.
  * }} props
  */
-export default function SortObjects({ items, groups, prompt, audioSrc, autoPlay = true, onComplete }) {
+export default function SortObjects({
+  items,
+  groups,
+  prompt,
+  audioSrc,
+  autoPlay = true,
+  correctAudio,
+  incorrectAudio,
+  hintText,
+  hintAudio,
+  onComplete,
+}) {
   const [placed, setPlaced] = useState({}) // itemId -> groupId
   const [selectedItem, setSelectedItem] = useState(null)
   const [shakeGroup, setShakeGroup] = useState(null)
-  const [message, triggerEncouragement] = useEncouragementMessage()
+  const { message, markCorrect, markIncorrect } = useAnswerFeedback({ correctAudio, incorrectAudio, hintText, hintAudio })
 
   const remaining = items.filter((item) => !placed[item.id])
   const allSorted = remaining.length === 0
@@ -41,6 +56,7 @@ export default function SortObjects({ items, groups, prompt, audioSrc, autoPlay 
       soundEffects.tap()
       setPlaced((prev) => ({ ...prev, [item.id]: groupId }))
       setSelectedItem(null)
+      markCorrect()
       const nowRemaining = items.filter((i) => !placed[i.id] && i.id !== item.id)
       if (nowRemaining.length === 0) {
         soundEffects.success()
@@ -49,7 +65,7 @@ export default function SortObjects({ items, groups, prompt, audioSrc, autoPlay 
       return
     }
 
-    triggerEncouragement()
+    markIncorrect()
     setShakeGroup(groupId)
     setTimeout(() => setShakeGroup(null), 350)
   }

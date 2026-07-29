@@ -4,14 +4,17 @@ import CardHeading from '../CardHeading'
 import ContinueButton from '../ContinueButton'
 import BuildQuantity from '../activities/BuildQuantity'
 import { renderObjectIcon } from '../objectIconRegistry'
-import { useSuccessMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 
 /**
  * BuildQuantityCard
- * Section 2 — "Construiește": the child is asked to place a specific
- * number of objects into a basket ("Pune 2 mere în coș."), one round
- * at a time with an increasing target. Nothing is solved for them —
- * they place, they count, they adjust.
+ * "Construiește": the child is asked to place a specific number of
+ * objects into a basket ("Pune 2 mere în coș."), one round at a time
+ * with an increasing target. Nothing is solved for them — they place,
+ * they count, they adjust. Every round's completion is confirmed with
+ * spoken + written feedback (there's no "wrong" state here — every tap
+ * is valid — so only the correct-answer half of `useAnswerFeedback` is
+ * used).
  *
  * @param {{
  *   build: {
@@ -25,13 +28,13 @@ import { useSuccessMessage } from '../encouragement'
 export default function BuildQuantityCard({ build, onContinue }) {
   const [roundIndex, setRoundIndex] = useState(0)
   const [finished, setFinished] = useState(false)
-  const [message, triggerSuccess] = useSuccessMessage()
+  const { message, markCorrect } = useAnswerFeedback()
   const rounds = build.rounds ?? []
   const round = rounds[roundIndex]
   const isLastRound = roundIndex >= rounds.length - 1
 
   const handleRoundComplete = () => {
-    triggerSuccess()
+    markCorrect()
     if (isLastRound) {
       setTimeout(() => setFinished(true), 900)
     } else {

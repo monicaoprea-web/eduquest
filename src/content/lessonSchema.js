@@ -85,16 +85,21 @@
  *   "Pune N mere în coș" — build a requested quantity by tapping objects into a basket.
  * @property {{title?: string, prompt?: string, icon?: string, rounds: {count: number}[]}} [quantityToDigit]
  *   A shown quantity (no tapping) paired with a digit-choice quiz.
- * @property {{icon: string, startCount: number, question?: string, explanation?: string}} [discoverZero]
+ * @property {{icon: string, startCount: number, question?: string, explanation?: string, correctText?: string, hintText?: string}} [discoverZero]
  *   Zero introduced narratively: objects are removed one by one down to none.
- * @property {{title?: string, rounds: {targetCount: number, groups: {icon: string, count: number}[]}[]}} [findGroup]
- *   "Găsește grupul cu N obiecte" — pick the matching group among a few, several rounds.
+ *   `correctText`/`hintText` feed the spoken/written answer feedback (see `useAnswerFeedback`).
+ * @property {{title?: string, rounds: {targetCount: number, groups: {icon: string, count: number}[], hintText?: string}[]}} [findGroup]
+ *   "Găsește grupul cu N obiecte" (or "Găsește grupul gol." when the target is 0) — pick the
+ *   matching group among a few, several rounds. Each round may set its own `hintText`.
  * @property {{title?: string, prompt?: string, rounds: {leftCount: number, rightCount: number, leftIcon: string, rightIcon: string}[]}} [compareGroups]
  *   "Care grup are mai multe?" — pick <, = or > between two groups, several rounds.
  * @property {{character: string, guidedPrompt?: string, freePrompt?: string}} [writeDigit]
  *   Watch a stroke demo, trace with a guide, then trace freehand.
  * @property {{id: string, title: string, purpose: string, instructions: string, items: string[]}[]} [worksheets]
  *   Plural, richer sibling of `worksheet` — a resource area for several distinct printable sheets.
+ * @property {{character: string}} [numberWorksheet]
+ *   The visually-designed "Number worksheet family 0-9" reference sheet (Standard + Ink Saving),
+ *   rendered by `NumberWorksheetCard`/`Worksheet0` — a real A4 layout, not a text list like `worksheets`.
  * @property {{prompt: string, hints?: string[]}} [aroundYou]
  *   Reggio-inspired open observation prompt ("Unde găsești 5 în jurul tău?").
  * @property {{icon: string, total: number, prompt: string}} [challengeSplit]
@@ -160,6 +165,7 @@ export const CONTENT_SECTION_FIELDS = [
   'writeDigit',
   'worksheet',
   'worksheets',
+  'numberWorksheet',
   'montessoriActivity',
   'offlineActivity',
   'aroundYou',

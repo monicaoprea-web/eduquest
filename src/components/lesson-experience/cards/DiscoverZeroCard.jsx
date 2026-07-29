@@ -4,17 +4,18 @@ import CardHeading from '../CardHeading'
 import ContinueButton from '../ContinueButton'
 import { BasketIcon } from '../objectIcons'
 import { renderObjectIcon } from '../objectIconRegistry'
-import { useEncouragementMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 import { soundEffects } from '../soundEffects'
 import { AudioInstruction } from '../audio'
 
 /**
  * DiscoverZeroCard
- * Section 4 — "Descoperim zero": zero is deliberately NOT introduced as
- * just another flashcard. A basket starts with a few objects; the
- * child removes them one at a time and watches the count count down
+ * "Descoperim zero": zero is deliberately NOT introduced as just
+ * another flashcard. A basket starts with a few objects; the child
+ * removes them one at a time and watches the count count down
  * (3 → 2 → 1 → 0) before being asked what's left and shown the digit
- * 0. A short, concrete sentence closes the idea.
+ * 0. A short, concrete sentence closes the idea. Correct/incorrect
+ * feedback on the final question is spoken as well as shown.
  *
  * @param {{
  *   discoverZero: {
@@ -22,15 +23,20 @@ import { AudioInstruction } from '../audio'
  *     startCount: number,
  *     question?: string,
  *     explanation?: string,
+ *     correctText?: string,
+ *     hintText?: string,
  *   },
  *   onContinue: () => void,
  * }} props
  */
 export default function DiscoverZeroCard({ discoverZero, onContinue }) {
-  const { icon, startCount, question, explanation } = discoverZero
+  const { icon, startCount, question, explanation, correctText, hintText } = discoverZero
   const [remaining, setRemaining] = useState(startCount)
   const [answered, setAnswered] = useState(false)
-  const [message, triggerEncouragement] = useEncouragementMessage()
+  const { message, markCorrect, markIncorrect } = useAnswerFeedback({
+    correctText: correctText ?? 'Da, acesta este zero.',
+    hintText: hintText ?? 'Coșul este gol.',
+  })
 
   const isEmpty = remaining === 0
   const choices = [0, 1, 2].sort(() => Math.random() - 0.5)
@@ -46,8 +52,9 @@ export default function DiscoverZeroCard({ discoverZero, onContinue }) {
     if (n === 0) {
       setAnswered(true)
       soundEffects.success()
+      markCorrect()
     } else {
-      triggerEncouragement()
+      markIncorrect()
     }
   }
 

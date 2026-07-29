@@ -14,6 +14,7 @@ import CompareGroupsCard from './cards/CompareGroupsCard'
 import WriteDigitCard from './cards/WriteDigitCard'
 import WorksheetPrintCard from './cards/WorksheetPrintCard'
 import WorksheetsCard from './cards/WorksheetsCard'
+import NumberWorksheetCard from './cards/NumberWorksheetCard'
 import ActivityCard from './cards/ActivityCard'
 import AroundYouCard from './cards/AroundYouCard'
 import ChallengeSplitCard from './cards/ChallengeSplitCard'
@@ -112,17 +113,17 @@ export const SECTION_REGISTRY = [
     ),
   },
   {
-    key: 'quantityToDigit',
-    isPresent: (lesson) => Boolean(lesson.quantityToDigit),
-    render: (lesson, ctx) => (
-      <QuantityToDigitCard quantityToDigit={lesson.quantityToDigit} onContinue={ctx.next} />
-    ),
-  },
-  {
     key: 'discoverZero',
     isPresent: (lesson) => Boolean(lesson.discoverZero),
     render: (lesson, ctx) => (
       <DiscoverZeroCard discoverZero={lesson.discoverZero} onContinue={ctx.next} />
+    ),
+  },
+  {
+    key: 'quantityToDigit',
+    isPresent: (lesson) => Boolean(lesson.quantityToDigit),
+    render: (lesson, ctx) => (
+      <QuantityToDigitCard quantityToDigit={lesson.quantityToDigit} onContinue={ctx.next} />
     ),
   },
   {
@@ -165,6 +166,13 @@ export const SECTION_REGISTRY = [
     isPresent: (lesson) => lesson.worksheets?.length > 0,
     render: (lesson, ctx) => (
       <WorksheetsCard worksheets={lesson.worksheets} lessonTitle={lesson.title} onContinue={ctx.next} />
+    ),
+  },
+  {
+    key: 'numberWorksheet',
+    isPresent: (lesson) => Boolean(lesson.numberWorksheet),
+    render: (lesson, ctx) => (
+      <NumberWorksheetCard numberWorksheet={lesson.numberWorksheet} onContinue={ctx.next} />
     ),
   },
   {

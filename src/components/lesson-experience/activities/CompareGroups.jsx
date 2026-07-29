@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { soundEffects } from '../soundEffects'
-import { useEncouragementMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 import { AudioInstruction } from '../audio'
 
 /**
@@ -10,6 +10,7 @@ import { AudioInstruction } from '../audio'
  * items as the right one, using three big comparison buttons (< > =).
  * Fully generic — counts and icons come from props, so the same
  * component works for comparing apples, stars, or anything else.
+ * Correct/incorrect feedback is spoken as well as shown.
  *
  * @param {{
  *   leftCount: number,
@@ -19,6 +20,11 @@ import { AudioInstruction } from '../audio'
  *   prompt?: string,
  *   audioSrc?: string,
  *   autoPlay?: boolean,
+ *   correctText?: string,
+ *   correctAudio?: string,
+ *   incorrectAudio?: string,
+ *   hintText?: string,
+ *   hintAudio?: string,
  *   onComplete?: () => void,
  * }} props
  */
@@ -30,10 +36,21 @@ export default function CompareGroups({
   prompt,
   audioSrc,
   autoPlay = true,
+  correctText,
+  correctAudio,
+  incorrectAudio,
+  hintText,
+  hintAudio,
   onComplete,
 }) {
   const [answered, setAnswered] = useState(false)
-  const [message, triggerEncouragement] = useEncouragementMessage()
+  const { message, markCorrect, markIncorrect } = useAnswerFeedback({
+    correctText,
+    correctAudio,
+    incorrectAudio,
+    hintText,
+    hintAudio,
+  })
 
   const correctSymbol = leftCount > rightCount ? '>' : leftCount < rightCount ? '<' : '='
 
@@ -42,9 +59,10 @@ export default function CompareGroups({
     if (symbol === correctSymbol) {
       setAnswered(true)
       soundEffects.success()
+      markCorrect()
       onComplete?.()
     } else {
-      triggerEncouragement()
+      markIncorrect()
     }
   }
 
@@ -91,7 +109,7 @@ export default function CompareGroups({
 
       <div className="min-h-[2.5rem] flex items-center justify-center">
         <p className="font-display font-semibold text-lg text-ink-900" aria-live="polite">
-          {message || (answered ? 'Corect!' : '')}
+          {message}
         </p>
       </div>
     </div>

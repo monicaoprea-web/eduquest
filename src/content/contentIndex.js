@@ -59,6 +59,19 @@ function buildIndex(lessons) {
     subject.chapters[chapterId].lessons.push(lesson)
   }
 
+  // Lessons are discovered in filesystem order, which says nothing about
+  // curriculum order (e.g. "Numărul și cifra 0" is taught 4th, not 1st).
+  // `lessonNumber` is the source of truth for display order within a
+  // chapter; lessons without one (e.g. an optional recap) sort after
+  // every numbered lesson, in file-discovery order among themselves.
+  for (const subjectsForClass of Object.values(index)) {
+    for (const subject of Object.values(subjectsForClass)) {
+      for (const chapter of Object.values(subject.chapters)) {
+        chapter.lessons.sort((a, b) => (a.lessonNumber ?? Infinity) - (b.lessonNumber ?? Infinity))
+      }
+    }
+  }
+
   return index
 }
 

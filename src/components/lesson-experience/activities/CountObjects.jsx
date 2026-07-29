@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { soundEffects } from '../soundEffects'
-import { useEncouragementMessage } from '../encouragement'
+import { useAnswerFeedback } from '../encouragement'
 import { AudioInstruction } from '../audio'
 
 /**
@@ -19,9 +19,9 @@ import { AudioInstruction } from '../audio'
  *   — useful for a pure "how many are there" discovery moment with no
  *   quiz attached.
  *
- * A wrong number choice never says "Wrong" — it shows a shared, kind
- * encouragement message instead (see `encouragement.js`) and lets the
- * child try again.
+ * A wrong number choice never says "Wrong" — spoken + written feedback
+ * comes from the shared `useAnswerFeedback` (see `encouragement.js`),
+ * including a hint on the second wrong attempt if `hintText` is given.
  *
  * @param {{
  *   icon?: React.ReactNode,    Object shown/repeated for each item. Default a plain dot.
@@ -32,6 +32,11 @@ import { AudioInstruction } from '../audio'
  *   interactive?: boolean,     Whether tapping is required to reveal the count. Default true.
  *   showChoices?: boolean,     Whether to ask the child to pick the matching digit. Default true.
  *   choiceSpread?: number,     How far distractor numbers can be from `count`. Default 2.
+ *   correctText?: string,      Spoken/shown affirmation on the right answer. Defaults to a generic pool.
+ *   correctAudio?: string,
+ *   incorrectAudio?: string,
+ *   hintText?: string,         Shown/spoken from the 2nd wrong attempt onward.
+ *   hintAudio?: string,
  *   onComplete?: () => void,   Called once counting (and the quiz, if any) is done.
  * }} props
  */
@@ -44,11 +49,22 @@ export default function CountObjects({
   interactive = true,
   showChoices = true,
   choiceSpread = 2,
+  correctText,
+  correctAudio,
+  incorrectAudio,
+  hintText,
+  hintAudio,
   onComplete,
 }) {
   const [tapped, setTapped] = useState(() => new Set())
   const [answered, setAnswered] = useState(false)
-  const [message, triggerEncouragement] = useEncouragementMessage()
+  const { message, markCorrect, markIncorrect } = useAnswerFeedback({
+    correctText,
+    correctAudio,
+    incorrectAudio,
+    hintText,
+    hintAudio,
+  })
 
   const allTapped = !interactive || tapped.size >= count
 
@@ -79,9 +95,10 @@ export default function CountObjects({
     if (n === count) {
       setAnswered(true)
       soundEffects.success()
+      markCorrect()
       onComplete?.()
     } else {
-      triggerEncouragement()
+      markIncorrect()
     }
   }
 

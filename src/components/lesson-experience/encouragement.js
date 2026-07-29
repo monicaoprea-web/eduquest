@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { speak } from './audio/audioManager'
 
 /**
- * encouragement
- * -------------
+ * encouragement / answer feedback
+ * --------------------------------
  * Shared, always-kind feedback used across every interactive activity:
  *
  * - A mistaken tap NEVER says "Greșit" / "Nu ai știut" / "Răspuns
@@ -14,6 +15,12 @@ import { useEffect, useRef, useState } from 'react'
  * Centralized here so DiscoverCard and every reusable Activity
  * component (CountObjects, MatchPairs, TraceNumber, SortObjects,
  * CompareGroups, BuildQuantity, FindGroup, ...) sound consistent.
+ *
+ * GLOBAL RULE (Clasa pregătitoare audio sprint): essential feedback —
+ * both correct and incorrect — must be spoken, not just written, since
+ * the child may not read independently. `useAnswerFeedback` below is
+ * the one place that rule lives; activities don't talk to the audio
+ * system directly for this.
  */
 export const ENCOURAGEMENTS = ['Mai încearcă!', 'Privește cu atenție.', 'Foarte bine, încă puțin!', 'Ești aproape!']
 
@@ -29,6 +36,90 @@ export function pickEncouragement(last) {
 /** Picks a random short affirmation for a correct answer. */
 export function pickSuccess() {
   return SUCCESS_WORDS[Math.floor(Math.random() * SUCCESS_WORDS.length)]
+}
+
+/**
+ * useAnswerFeedback
+ * The one hook every quiz-like activity (CountObjects, FindGroup,
+ * CompareGroups, MatchPairs, SortObjects, the zero mini-quiz in
+ * DiscoverZeroCard, ...) uses for feedback. Combines the visible
+ * message, the spoken narration, and progressive hint scaffolding in
+ * one place — activities never call the audio system directly for
+ * this, so the "essential feedback must support audio" rule can't be
+ * accidentally skipped by a new activity.
+ *
+ * Scaffolding: the first wrong attempt gets a generic, varied
+ * encouragement; the second (and any further) wrong attempt shows
+ * `hintText`, if the caller provided one for that question — a small,
+ * content-specific clue rather than the same "try again" on repeat.
+ * With no `hintText`, it keeps rotating generic encouragements instead
+ * of ever saying "Greșit" or repeating verbatim.
+ *
+ * Starting any new feedback (correct or incorrect) naturally stops
+ * whatever was narrating before it, via the shared `audioManager`
+ * singleton — including the activity's own instruction, if it was
+ * still playing. The instruction's own replay button keeps working
+ * afterwards; feedback never replaces or blocks it.
+ *
+ * @param {{
+ *   correctText?: string,     Defaults to a generic pickSuccess() pool.
+ *   correctAudio?: string,    Real recorded file, if available.
+ *   incorrectAudio?: string,  Real recorded file for the first-attempt nudge, if available.
+ *   hintText?: string,        Shown/spoken from the 2nd wrong attempt onward.
+ *   hintAudio?: string,       Real recorded file for the hint, if available.
+ * }} [options]
+ * @returns {{
+ *   message: string,
+ *   attempts: number,
+ *   markCorrect: () => void,
+ *   markIncorrect: () => void,
+ *   reset: () => void,
+ * }}
+ */
+export function useAnswerFeedback({
+  correctText,
+  correctAudio,
+  incorrectAudio,
+  hintText,
+  hintAudio,
+} = {}) {
+  const [message, setMessage] = useState('')
+  const [attempts, setAttempts] = useState(0)
+  const lastMessageRef = useRef('')
+  const timeoutRef = useRef(null)
+
+  useEffect(() => () => clearTimeout(timeoutRef.current), [])
+
+  const show = (text, audioSrc) => {
+    lastMessageRef.current = text
+    setMessage(text)
+    speak({ text, audioSrc })
+    clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(() => setMessage(''), 1600)
+  }
+
+  const markCorrect = () => {
+    show(correctText ?? pickSuccess(), correctAudio)
+  }
+
+  const markIncorrect = () => {
+    const nextAttempts = attempts + 1
+    setAttempts(nextAttempts)
+
+    if (nextAttempts >= 2 && hintText) {
+      show(hintText, hintAudio)
+    } else {
+      show(pickEncouragement(lastMessageRef.current), incorrectAudio)
+    }
+  }
+
+  const reset = () => {
+    setAttempts(0)
+    setMessage('')
+    lastMessageRef.current = ''
+  }
+
+  return { message, attempts, markCorrect, markIncorrect, reset }
 }
 
 /**
