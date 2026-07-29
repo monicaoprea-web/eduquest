@@ -1,0 +1,96 @@
+{
+  "id": "clasa-1-mate-numere-10-30",
+  "classId": "clasa-1",
+  "className": "Clasa I",
+  "subjectId": "matematica",
+  "subjectName": "Matematică",
+  "chapterId": "numere",
+  "chapterName": "Numere",
+  "title": "Numerele 10-30",
+  "ageRange": "6-7 ani",
+  "durationMinutes": 25,
+  "level": "Mediu",
+  "intro": "Astăzi urcăm o treaptă mai sus, spre numerele mai mari, de la 10 la 30.",
+  "objectives": [
+    "Citește și scrie numerele de la 10 la 30.",
+    "Înțelege formarea numerelor din zeci și unități.",
+    "Compară două numere din intervalul 10-30, folosind semnele <, > sau =."
+  ],
+  "materials": [
+    "30 de bețișoare, paie sau creioane colorate",
+    "Elastice sau ață pentru legat mănunchiurile",
+    "Un creion"
+  ],
+  "explanation": [
+    "Orice număr între 10 și 99 este format din două cifre: cifra zecilor (în stânga) și cifra unităților (în dreapta).",
+    "Numărul 10 este primul „zece întreg”: are 1 zece și 0 unități. Numărul 20 are 2 zeci și 0 unități, iar 30 are 3 zeci și 0 unități.",
+    "Pentru numere ca 24, gândește-te așa: „2 zeci” înseamnă 20, la care adăugăm „4 unități”, adică 20 + 4 = 24.",
+    "Pentru a compara două numere, verificăm întâi cifra zecilor. Numărul cu mai multe zeci este mai mare. Dacă zecile sunt egale, decide cifra unităților.",
+    "Semnele de comparație se citesc astfel: < înseamnă „mai mic decât”, > înseamnă „mai mare decât”, iar = înseamnă „egal cu”."
+  ],
+  "examples": [
+    {
+      "title": "Descompunem 27",
+      "content": "27 este format din 2 zeci și 7 unități, adică 20 + 7 = 27. Poți desena 2 mănunchiuri de câte 10 bețișoare, plus alte 7 bețișoare separate."
+    },
+    {
+      "title": "Comparăm 15 și 19",
+      "content": "Ambele numere au 1 zece, deci ne uităm la unități: 5 și 9. Cum 9 este mai mare decât 5, rezultă că 19 > 15."
+    },
+    {
+      "title": "Numărăm din 10 în 10",
+      "content": "Pornind de la 0, dacă adăugăm mereu un mănunchi întreg de 10, obținem șirul: 0, 10, 20, 30 — fiecare pas adaugă exact o zece."
+    }
+  ],
+  "worksheet": {
+    "instructions": "Printează fișa și completează spațiile libere folosind un creion.",
+    "items": [
+      "Scrie numerele lipsă din șirul: 10, 11, __, 13, __, 15.",
+      "Descompune numărul 26 în zeci și unități: 26 = __ zeci + __ unități.",
+      "Compară numerele folosind semnele <, > sau =: 17 __ 22.",
+      "Desenează mănunchiuri de câte 10 bețișoare pentru a reprezenta numărul 28.",
+      "Scrie, în ordine crescătoare, toate numerele din 10 în 10, de la 10 la 30."
+    ]
+  },
+  "montessoriActivity": {
+    "title": "Bara zecilor și perlele unităților",
+    "description": "Folosind bare de câte 10 cuburi unite (reprezentând zecile) și cuburi individuale (unitățile), copilul construiește fizic numere din intervalul 10-30, așezând barele de zeci în stânga și cuburile de unități în dreapta, exact ca în scrierea numărului.",
+    "materials": ["3 bare a câte 10 cuburi unite", "9 cuburi individuale colorate diferit"]
+  },
+  "offlineActivity": {
+    "title": "Mănunchiurile de zece",
+    "materials": ["30 de bețișoare, paie sau creioane colorate", "Elastice sau ață pentru legat mănunchiurile"],
+    "steps": [
+      "Cere copilului să grupeze bețișoarele câte 10, legând fiecare mănunchi cu un elastic.",
+      "Formați împreună un număr cerut (de exemplu 23) folosind mănunchiuri întregi și bețișoare separate.",
+      "Puneți copilul să scrie pe o foaie numărul format și să explice câte zeci și câte unități are.",
+      "Repetați jocul cu alte numere între 10 și 30, alternând cine alege numărul."
+    ]
+  },
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Din câte zeci și unități este format numărul 24?",
+      "options": ["2 zeci și 4 unități", "4 zeci și 2 unități", "24 de zeci"],
+      "correctIndex": 0,
+      "explanation": "24 = 20 + 4, adică 2 zeci și 4 unități."
+    },
+    {
+      "id": "q2",
+      "question": "Care număr este mai mare: 18 sau 21?",
+      "options": ["18", "21", "Sunt egale"],
+      "correctIndex": 1,
+      "explanation": "21 are 2 zeci, iar 18 are doar 1 zece, deci 21 este mai mare."
+    },
+    {
+      "id": "q3",
+      "question": "Ce număr obții dacă ai 3 zeci și 0 unități?",
+      "options": ["3", "13", "30"],
+      "correctIndex": 2,
+      "explanation": "3 zeci înseamnă 3 mănunchiuri întregi de câte zece, adică 30."
+    }
+  ],
+  "curiosity": "Sistemul nostru de numerație se numește „zecimal” tocmai pentru că grupăm totul câte zece — probabil pentru că oamenii au învățat să numere folosind cele zece degete de la mâini!",
+  "parentGuide": "La această vârstă, cea mai frecventă dificultate este trecerea peste un „zece întreg” (de exemplu de la 19 la 20). Explicați clar diferența dintre zeci și unități, ideal cu obiecte reale grupate câte 10. Când mergeți la cumpărături sau urcați scările, cereți copilului să numere cu voce tare din 10 în 10.",
+  "summary": "Ai învățat cum se formează numerele din zeci și unități și cum comparăm două numere din intervalul 10-30. Exersează numărând din 10 în 10 ori de câte ori ai ocazia!"
+}
