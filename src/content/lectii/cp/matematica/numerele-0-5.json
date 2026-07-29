@@ -1,0 +1,200 @@
+{
+  "id": "EQ-CP-MAT-001",
+  "classId": "cp",
+  "className": "Clasa pregătitoare",
+  "subjectId": "matematica",
+  "subjectName": "Matematică și explorarea mediului",
+  "chapterId": "numere",
+  "chapterName": "Numere",
+  "title": "Numerele de la 0 la 5",
+  "lessonNumber": 1,
+  "totalLessons": 18,
+  "ageRange": "5-6 ani",
+  "durationMinutes": 20,
+  "level": "Ușor",
+  "intro": "Astăzi descoperim numerele de la 0 la 5, cu obiecte pe care le putem atinge și număra.",
+  "objectives": [
+    "Numărăm împreună de la 0 la 5.",
+    "Legăm o cantitate de cifra ei scrisă.",
+    "Descoperim ce înseamnă cifra 0."
+  ],
+  "discoverCount": {
+    "title": "Câte sunt?",
+    "prompt": "Atinge fiecare obiect și numără cu voce tare.",
+    "rounds": [
+      { "icon": "apple", "count": 1 },
+      { "icon": "apple", "count": 2 },
+      { "icon": "apple", "count": 3 },
+      { "icon": "apple", "count": 4 },
+      { "icon": "apple", "count": 5 },
+      { "icon": "ball", "count": 3 },
+      { "icon": "leaf", "count": 4 },
+      { "icon": "pencil", "count": 5 }
+    ],
+    "insight": "Ultimul număr spus ne arată câte obiecte sunt în total."
+  },
+  "buildQuantity": {
+    "title": "Construiește",
+    "icon": "apple",
+    "rounds": [
+      { "targetCount": 2, "instruction": "Pune 2 mere în coș." },
+      { "targetCount": 4, "instruction": "Pune 4 mere în coș." },
+      { "targetCount": 5, "instruction": "Pune 5 mere în coș." }
+    ]
+  },
+  "quantityToDigit": {
+    "title": "Cantitate → Cifră",
+    "prompt": "Ce cifră ne arată câte sunt?",
+    "icon": "dot",
+    "rounds": [{ "count": 2 }, { "count": 5 }, { "count": 1 }, { "count": 4 }, { "count": 3 }]
+  },
+  "discoverZero": {
+    "icon": "apple",
+    "startCount": 3,
+    "question": "Câte mere au rămas?",
+    "explanation": "Zero ne arată că nu a mai rămas niciun măr."
+  },
+  "findGroup": {
+    "title": "Găsește grupul",
+    "rounds": [
+      {
+        "targetCount": 4,
+        "groups": [
+          { "icon": "apple", "count": 2 },
+          { "icon": "ball", "count": 4 },
+          { "icon": "pencil", "count": 5 }
+        ]
+      },
+      {
+        "targetCount": 2,
+        "groups": [
+          { "icon": "leaf", "count": 2 },
+          { "icon": "apple", "count": 5 },
+          { "icon": "ball", "count": 3 }
+        ]
+      },
+      {
+        "targetCount": 5,
+        "groups": [
+          { "icon": "pencil", "count": 1 },
+          { "icon": "apple", "count": 3 },
+          { "icon": "ball", "count": 5 }
+        ]
+      },
+      {
+        "targetCount": 0,
+        "groups": [
+          { "icon": "leaf", "count": 0 },
+          { "icon": "apple", "count": 2 },
+          { "icon": "pencil", "count": 4 }
+        ]
+      },
+      {
+        "targetCount": 3,
+        "groups": [
+          { "icon": "ball", "count": 4 },
+          { "icon": "leaf", "count": 3 },
+          { "icon": "apple", "count": 1 }
+        ]
+      },
+      {
+        "targetCount": 1,
+        "groups": [
+          { "icon": "pencil", "count": 1 },
+          { "icon": "apple", "count": 4 },
+          { "icon": "ball", "count": 2 }
+        ]
+      }
+    ]
+  },
+  "writeDigit": {
+    "character": "5"
+  },
+  "worksheets": [
+    {
+      "id": "numar-0-5",
+      "title": "Număr 0–5",
+      "purpose": "Numără obiecte, asociază cantități cu cifre și identifică grupuri.",
+      "instructions": "Lucrează cu un creion. Numără cu voce tare înainte de a scrie.",
+      "items": [
+        "Numără obiectele din fiecare grup și scrie cifra potrivită.",
+        "Desenează exact 4 mere în cutia goală.",
+        "Încercuiește grupul care are 5 obiecte.",
+        "Unește cu o linie fiecare cifră (0-5) cu numărul potrivit de puncte.",
+        "Colorează doar grupurile care au mai puțin de 3 obiecte."
+      ]
+    },
+    {
+      "id": "cifra-5",
+      "title": "Cifra 5",
+      "purpose": "Trasare mare, ghidată și scriere independentă a cifrei 5.",
+      "instructions": "Începe cu degetul, apoi cu creionul. Nu trebuie să fie perfect.",
+      "items": [
+        "Trasează cifra 5 mare, urmărind linia punctată, de 3 ori.",
+        "Scrie cifra 5 fără ajutor, în casetele libere.",
+        "Încercuiește toate cifrele 5 dintr-un șir de cifre amestecate.",
+        "Desenează 5 obiecte lângă cifra pe care ai scris-o."
+      ]
+    },
+    {
+      "id": "gandesc-cu-5",
+      "title": "Gândesc cu 5",
+      "purpose": "Compune vizual 5, împarte în grupuri, o provocare deschisă.",
+      "instructions": "Folosește culori diferite pentru fiecare grupă, dacă vrei.",
+      "items": [
+        "Colorează 2 mere cu roșu și 3 mere cu galben. Câte mere sunt în total?",
+        "Desenează două grupuri diferite care, împreună, fac 5.",
+        "Ce lipsește? Un grup are 5 obiecte, dar sunt desenate doar 3. Desenează-le pe celelalte 2.",
+        "Provocare: găsește tu însuți alte două grupuri care fac împreună 5."
+      ]
+    }
+  ],
+  "offlineActivity": {
+    "title": "Încearcă în lumea reală",
+    "description": "Cele mai bune descoperiri despre numere se fac departe de ecran, cu obiecte adevărate.",
+    "materials": ["cuburi", "nasturi", "creioane", "pietricele"],
+    "steps": [
+      "Găsește 5 obiecte mici.",
+      "Pune-le unul lângă altul.",
+      "Atinge fiecare obiect și numără cu voce tare.",
+      "Ascunde un obiect. Câte au rămas?"
+    ]
+  },
+  "aroundYou": {
+    "prompt": "Unde găsești 5 în jurul tău?",
+    "hints": ["cinci degete", "cinci creioane", "cinci jucării", "cinci frunze", "cinci pași"]
+  },
+  "challengeSplit": {
+    "icon": "ball",
+    "total": 5,
+    "prompt": "Poți să le împarți în două grupuri?"
+  },
+  "recap": {
+    "buildTask": { "icon": "apple", "targetCount": 3, "instruction": "Arată-mi 3 obiecte." },
+    "findTask": {
+      "targetCount": 5,
+      "instruction": "Care grup are 5 obiecte?",
+      "groups": [
+        { "icon": "leaf", "count": 2 },
+        { "icon": "ball", "count": 5 },
+        { "icon": "pencil", "count": 3 }
+      ]
+    },
+    "zeroTask": { "icon": "apple", "instruction": "Coșul este gol. Ce cifră se potrivește?" }
+  },
+  "curiosity": "Știai că cifra 0 a fost inventată cu sute de ani în urmă, mult mai târziu decât celelalte cifre? Fără ea, nu am putea scrie numere mari, precum 10 sau 100!",
+  "parentGuide": {
+    "goal": "Copilul descoperă cantitățile 0-5 și începe să lege cantitatea de cifra scrisă.",
+    "atHome": "Cere-i copilului să formeze grupuri de 1-5 obiecte folosind lucruri pe care le aveți la îndemână.",
+    "goodQuestion": "Cum mai putem face 5?"
+  },
+  "teacherNotes": [
+    "Lecția respectă principiul Montessori „cantitate înaintea simbolului”: copilul manipulează și numără obiecte concrete înainte de a lucra cu cifra scrisă.",
+    "Progresia urmează modelul CPA (Concret → Pictorial → Abstract): obiecte reale/interactive → reprezentare vizuală (puncte) → cifra scrisă.",
+    "Secțiunea despre zero este tratată narativ (îndepărtare fizică, unu câte unu), nu ca un simplu flashcard, pentru a construi înțelegere conceptuală, nu memorare.",
+    "Secțiunea „Provocarea” evită notația formală de adunare; scopul este observarea că 5 poate fi compus din grupuri mai mici, nu învățarea semnului +.",
+    "Recapitularea reutilizează exact interacțiunile din lecție, fără scor sau cronometru — este o atingere ușoară de retrieval practice, nu o evaluare."
+  ],
+  "summary": "Ai descoperit cantitățile de la 0 la 5, ai legat fiecare cantitate de cifra ei și ai scris pentru prima dată cifra 5. Exersează acasă cu obiecte adevărate — asta ajută cel mai mult!",
+  "completionMessage": "Ai terminat lecția!"
+}

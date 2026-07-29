@@ -1,29 +1,16 @@
-# EduQuest MVP
+# React + Vite
 
-Primul MVP web static pentru aplicația educațională.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Rulează local
+Currently, two official plugins are available:
 
-```bash
-npm install
-npm run dev
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Build pentru Cloudflare Pages
+## React Compiler
 
-```bash
-npm run build
-```
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Setări Cloudflare Pages:
-- Framework preset: Vite
-- Build command: `npm run build`
-- Build output directory: `dist`
+## Expanding the Oxlint configuration
 
-## Unde modifici conținutul
-
-Conținutul lecțiilor este în:
-
-`src/content.js`
-
-Acolo poți adăuga clase, materii, lumi, lecții, quiz-uri și fișe.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
