@@ -44,15 +44,13 @@ export default function BuildQuantityCard({ build, onContinue }) {
       <CardHeading icon="🧱" eyebrow="Construiește" title={build.title ?? 'Construiește'} />
 
       {round && !finished && (
-        <>
-          <p className="font-display font-semibold text-lg text-ink-900 -mt-2">{round.instruction}</p>
-          <BuildQuantity
-            key={roundIndex}
-            icon={renderObjectIcon(build.icon, 'w-10 h-10 sm:w-12 sm:h-12')}
-            targetCount={round.targetCount}
-            onComplete={handleRoundComplete}
-          />
-        </>
+        <BuildQuantity
+          key={roundIndex}
+          icon={renderObjectIcon(build.icon, 'w-10 h-10 sm:w-12 sm:h-12')}
+          targetCount={round.targetCount}
+          prompt={round.instruction}
+          onComplete={handleRoundComplete}
+        />
       )}
 
       <div className="min-h-[1.75rem]" aria-live="polite">

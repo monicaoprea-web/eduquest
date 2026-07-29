@@ -6,6 +6,7 @@ import { BasketIcon } from '../objectIcons'
 import { renderObjectIcon } from '../objectIconRegistry'
 import { useEncouragementMessage } from '../encouragement'
 import { soundEffects } from '../soundEffects'
+import { AudioInstruction } from '../audio'
 
 /**
  * DiscoverZeroCard
@@ -56,7 +57,7 @@ export default function DiscoverZeroCard({ discoverZero, onContinue }) {
 
       {!isEmpty && (
         <>
-          <p className="text-ink-700">Scoate merele din coș, unul câte unul.</p>
+          <AudioInstruction text="Scoate merele din coș, unul câte unul." textClassName="text-ink-700" />
           <div className="flex items-center justify-center gap-3 flex-wrap min-h-16">
             {Array.from({ length: remaining }).map((_, i) => (
               <button
@@ -78,7 +79,7 @@ export default function DiscoverZeroCard({ discoverZero, onContinue }) {
           <div className="flex items-center justify-center" aria-hidden="true">
             <BasketIcon className="w-16 h-16 opacity-40" />
           </div>
-          <p className="font-display font-semibold text-lg text-ink-900">{question ?? 'Câte mere au rămas?'}</p>
+          <AudioInstruction text={question ?? 'Câte mere au rămas?'} />
           <div className="flex items-center gap-3" role="group" aria-label="Alege numărul potrivit">
             {choices.map((n) => (
               <button
@@ -99,7 +100,7 @@ export default function DiscoverZeroCard({ discoverZero, onContinue }) {
       {answered && (
         <>
           <p className="font-display font-extrabold text-7xl text-ocean-500 finger-pop">0</p>
-          {explanation && <p className="text-ink-700 max-w-md">{explanation}</p>}
+          {explanation && <AudioInstruction text={explanation} textClassName="text-ink-700 max-w-md" />}
           <ContinueButton onClick={onContinue} tone="leaf" />
         </>
       )}

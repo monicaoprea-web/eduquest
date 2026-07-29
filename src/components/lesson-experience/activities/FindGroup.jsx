@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { useEncouragementMessage } from '../encouragement'
+import { AudioInstruction } from '../audio'
 
 /**
  * FindGroup
@@ -14,10 +15,12 @@ import { useEncouragementMessage } from '../encouragement'
  *   groups: { id: string, icon: React.ReactNode, count: number }[],
  *   targetCount: number,
  *   prompt?: string,
+ *   audioSrc?: string,
+ *   autoPlay?: boolean,
  *   onComplete?: () => void,
  * }} props
  */
-export default function FindGroup({ groups, targetCount, prompt, onComplete }) {
+export default function FindGroup({ groups, targetCount, prompt, audioSrc, autoPlay = true, onComplete }) {
   const [answered, setAnswered] = useState(false)
   const [wrongId, setWrongId] = useState(null)
   const [message, triggerEncouragement] = useEncouragementMessage()
@@ -44,7 +47,7 @@ export default function FindGroup({ groups, targetCount, prompt, onComplete }) {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {prompt && <p className="text-ink-700 max-w-md font-display font-semibold text-lg">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
 
       <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-lg">
         {shuffled.map((group) => {

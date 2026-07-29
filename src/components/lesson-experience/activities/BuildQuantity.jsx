@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { BasketIcon } from '../objectIcons'
+import { AudioInstruction } from '../audio'
 
 /**
  * BuildQuantity
@@ -19,10 +20,13 @@ import { BasketIcon } from '../objectIcons'
  *   icon: React.ReactNode,     Object shown for each item.
  *   targetCount: number,       How many the child needs to place.
  *   poolSize?: number,         How many objects are available to choose from. Default targetCount + 2.
+ *   prompt?: string,           Optional instruction, e.g. "Pune 2 mere în coș."
+ *   audioSrc?: string,         Real recorded narration for `prompt`, if available.
+ *   autoPlay?: boolean,        Narrate `prompt` once automatically. Default true.
  *   onComplete?: () => void,   Called once exactly targetCount objects are placed.
  * }} props
  */
-export default function BuildQuantity({ icon, targetCount, poolSize, onComplete }) {
+export default function BuildQuantity({ icon, targetCount, poolSize, prompt, audioSrc, autoPlay = true, onComplete }) {
   const total = poolSize ?? Math.min(targetCount + 2, 8)
   const [inBasket, setInBasket] = useState(() => new Set())
   const [done, setDone] = useState(false)
@@ -50,6 +54,8 @@ export default function BuildQuantity({ icon, targetCount, poolSize, onComplete 
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
+
       <div className="flex items-center justify-center gap-3 flex-wrap min-h-16 max-w-md" aria-label="Obiecte disponibile">
         {Array.from({ length: total }).map((_, i) => {
           if (inBasket.has(i)) return null

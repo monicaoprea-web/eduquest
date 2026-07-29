@@ -4,6 +4,7 @@ import CardHeading from '../CardHeading'
 import ContinueButton from '../ContinueButton'
 import { renderObjectIcon } from '../objectIconRegistry'
 import { soundEffects } from '../soundEffects'
+import { AudioInstruction } from '../audio'
 
 /**
  * ChallengeSplitCard
@@ -41,7 +42,7 @@ export default function ChallengeSplitCard({ challengeSplit, onContinue }) {
   return (
     <LessonCardShell>
       <CardHeading icon="🧠" eyebrow="Provocarea" />
-      <p className="font-display font-semibold text-lg text-ink-900 max-w-md -mt-2">{prompt}</p>
+      <AudioInstruction text={prompt} textClassName="font-display font-semibold text-lg text-ink-900 max-w-md" />
 
       <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
         <div className="min-h-[96px] flex flex-wrap items-center justify-center gap-2 content-center rounded-3xl bg-ocean-50 ring-2 ring-ocean-100 p-3">

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { useEncouragementMessage } from '../encouragement'
+import { AudioInstruction } from '../audio'
 
 /**
  * CompareGroups
@@ -13,13 +14,24 @@ import { useEncouragementMessage } from '../encouragement'
  * @param {{
  *   leftCount: number,
  *   rightCount: number,
- *   leftIcon?: string,
- *   rightIcon?: string,
+ *   leftIcon?: React.ReactNode,
+ *   rightIcon?: React.ReactNode,
  *   prompt?: string,
+ *   audioSrc?: string,
+ *   autoPlay?: boolean,
  *   onComplete?: () => void,
  * }} props
  */
-export default function CompareGroups({ leftCount, rightCount, leftIcon = '🍎', rightIcon = '🍇', prompt, onComplete }) {
+export default function CompareGroups({
+  leftCount,
+  rightCount,
+  leftIcon,
+  rightIcon,
+  prompt,
+  audioSrc,
+  autoPlay = true,
+  onComplete,
+}) {
   const [answered, setAnswered] = useState(false)
   const [message, triggerEncouragement] = useEncouragementMessage()
 
@@ -49,7 +61,7 @@ export default function CompareGroups({ leftCount, rightCount, leftIcon = '🍎'
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {prompt && <p className="text-ink-700 max-w-md">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
 
       <div className="flex items-center justify-center gap-6 sm:gap-10">
         <Group count={leftCount} icon={leftIcon} label="Grupul din stânga" />

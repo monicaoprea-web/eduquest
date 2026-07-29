@@ -40,7 +40,7 @@
  * @property {number} [itemCount]  How many items to interact with (interactiveActivity only).
  *
  * @typedef {Object} Lesson
- * @property {string} id                 Unique slug, e.g. "EQ-CP-MAT-001"
+ * @property {string} id                 Unique slug, e.g. "EQ-CP-MAT-R01"
  * @property {string} classId            e.g. "cp", "clasa-1"
  * @property {string} className          e.g. "Clasa pregătitoare"
  * @property {string} subjectId          e.g. "matematica"
@@ -67,12 +67,17 @@
  * @property {LessonActivity} [montessoriActivity]  Adapted using everyday objects, not special Montessori materials.
  * @property {LessonActivity} [offlineActivity]
  * @property {LessonQuizQuestion[]} [quiz]
- * @property {string} [curiosity]
+ * @property {string | {text: string, details?: string, audioSrc?: string}} [curiosity]
+ *   A short, central-concept "Știai că?" fact for Clasa pregătitoare (structured shape),
+ *   or a plain string for older lessons — see CuriosityCard. Longer historical/contextual
+ *   trivia goes in `details`, revealed only via an optional "Pentru curioși" expander,
+ *   and is never autoplayed (see the Voice/audio note below).
  * @property {string} [parentGuide]
  * @property {string} [summary]                    Short closing recap shown on the final card.
  * @property {string} [completionMessage]           Headline shown on completion, e.g. "Ai terminat prima lecție!"
  *
- * Sections added for EQ-CP-MAT-001 ("Numerele de la 0 la 5") — same
+ * Sections added for the "Numerele 0-5" content family (originally
+ * built for EQ-CP-MAT-001, now the recap lesson EQ-CP-MAT-R01) — same
  * graceful-hide rule applies; a lesson only uses the ones it needs:
  * @property {{title?: string, prompt?: string, rounds: {icon: string, count: number}[], insight?: string}} [discoverCount]
  *   Progressive tap-to-count discovery across one or more object types.
@@ -84,6 +89,8 @@
  *   Zero introduced narratively: objects are removed one by one down to none.
  * @property {{title?: string, rounds: {targetCount: number, groups: {icon: string, count: number}[]}[]}} [findGroup]
  *   "Găsește grupul cu N obiecte" — pick the matching group among a few, several rounds.
+ * @property {{title?: string, prompt?: string, rounds: {leftCount: number, rightCount: number, leftIcon: string, rightIcon: string}[]}} [compareGroups]
+ *   "Care grup are mai multe?" — pick <, = or > between two groups, several rounds.
  * @property {{character: string, guidedPrompt?: string, freePrompt?: string}} [writeDigit]
  *   Watch a stroke demo, trace with a guide, then trace freehand.
  * @property {{id: string, title: string, purpose: string, instructions: string, items: string[]}[]} [worksheets]
@@ -105,6 +112,18 @@
  * `parentGuide` may also be the structured shape
  * `{ goal?: string, atHome?: string, goodQuestion?: string }` instead
  * of a plain string, for a more scannable note (see ParentGuideCard).
+ *
+ * Voice/audio (Clasa pregătitoare narration sprint):
+ * Every reusable activity that shows a `prompt` (CountObjects,
+ * BuildQuantity, FindGroup, TraceNumber, MatchPairs, SortObjects,
+ * CompareGroups) also accepts a sibling `audioSrc` and `autoPlay` prop
+ * — narrated via `useLessonAudio`/`AudioInstruction` in
+ * `src/components/lesson-experience/audio/`. No lesson currently sets
+ * an `audioSrc` (no recordings exist yet, so everything falls back to
+ * ro-RO Speech Synthesis) — when real files are ready, a card can pass
+ * e.g. `audioSrc={lesson.discoverZero.questionAudio}` by adding that
+ * one optional field to the relevant JSON object, without changing any
+ * component code.
  */
 
 /** Identity/routing fields every lesson JSON file must define. */
@@ -137,6 +156,7 @@ export const CONTENT_SECTION_FIELDS = [
   'discoverZero',
   'interactiveActivity',
   'findGroup',
+  'compareGroups',
   'writeDigit',
   'worksheet',
   'worksheets',

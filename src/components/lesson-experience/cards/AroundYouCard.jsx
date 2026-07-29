@@ -2,6 +2,7 @@ import { useState } from 'react'
 import LessonCardShell from '../LessonCardShell'
 import CardHeading from '../CardHeading'
 import ContinueButton from '../ContinueButton'
+import { AudioInstruction } from '../audio'
 
 /**
  * AroundYouCard
@@ -22,7 +23,7 @@ export default function AroundYouCard({ aroundYou, onContinue }) {
     <LessonCardShell>
       <CardHeading icon="🧭" eyebrow="Descoperă în jurul tău" />
 
-      <p className="font-display font-semibold text-xl text-ink-900 max-w-md">{aroundYou.prompt}</p>
+      <AudioInstruction text={aroundYou.prompt} textClassName="font-display font-semibold text-xl text-ink-900 max-w-md" />
 
       {!showHints && aroundYou.hints?.length > 0 && (
         <button

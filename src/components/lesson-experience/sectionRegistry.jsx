@@ -10,6 +10,7 @@ import QuantityToDigitCard from './cards/QuantityToDigitCard'
 import DiscoverZeroCard from './cards/DiscoverZeroCard'
 import InteractiveActivityCard from './cards/InteractiveActivityCard'
 import FindGroupCard from './cards/FindGroupCard'
+import CompareGroupsCard from './cards/CompareGroupsCard'
 import WriteDigitCard from './cards/WriteDigitCard'
 import WorksheetPrintCard from './cards/WorksheetPrintCard'
 import WorksheetsCard from './cards/WorksheetsCard'
@@ -40,7 +41,8 @@ import DiscoverCard from './cards/DiscoverCard'
  * `ctx` (passed to every `render`) carries the things that aren't part
  * of the lesson content itself: navigation callbacks and routing info.
  *
- * Sections added for EQ-CP-MAT-001 ("Numerele de la 0 la 5") sit
+ * Sections added for the "Numerele 0-5" content family (originally
+ * built for EQ-CP-MAT-001, now the recap lesson EQ-CP-MAT-R01) sit
  * alongside the original generic sections rather than replacing them —
  * older lessons (e.g. "Numerele 10-30") keep using `interactiveActivity`,
  * `worksheet` (singular) and `montessoriActivity` exactly as before.
@@ -135,6 +137,13 @@ export const SECTION_REGISTRY = [
     isPresent: (lesson) => Boolean(lesson.findGroup),
     render: (lesson, ctx) => (
       <FindGroupCard findGroup={lesson.findGroup} onContinue={ctx.next} />
+    ),
+  },
+  {
+    key: 'compareGroups',
+    isPresent: (lesson) => Boolean(lesson.compareGroups),
+    render: (lesson, ctx) => (
+      <CompareGroupsCard compareGroups={lesson.compareGroups} onContinue={ctx.next} />
     ),
   },
   {

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { soundEffects } from '../soundEffects'
+import { AudioInstruction } from '../audio'
 
 /**
  * TraceNumber
@@ -12,6 +13,8 @@ import { soundEffects } from '../soundEffects'
  * @param {{
  *   character: string,        The digit or letter to trace, e.g. "5".
  *   prompt?: string,
+ *   audioSrc?: string,        Real recorded narration for `prompt`, if available.
+ *   autoPlay?: boolean,       Narrate `prompt` once automatically. Default true.
  *   strokeColor?: string,     CSS color for the drawn line. Default the ocean brand color.
  *   showGuide?: boolean,      Show the dashed outline to trace over. Default true —
  *                             set false for an independent, guide-free writing attempt.
@@ -22,6 +25,8 @@ import { soundEffects } from '../soundEffects'
 export default function TraceNumber({
   character,
   prompt,
+  audioSrc,
+  autoPlay = true,
   strokeColor = '#2f6fed',
   showGuide = true,
   doneLabel = '✓ Am terminat',
@@ -103,7 +108,7 @@ export default function TraceNumber({
 
   return (
     <div className="flex flex-col items-center gap-5 w-full">
-      {prompt && <p className="text-ink-700 max-w-md">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
 
       <div
         ref={containerRef}

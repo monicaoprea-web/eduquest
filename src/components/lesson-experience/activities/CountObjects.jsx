@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { useEncouragementMessage } from '../encouragement'
+import { AudioInstruction } from '../audio'
 
 /**
  * CountObjects
@@ -26,6 +27,8 @@ import { useEncouragementMessage } from '../encouragement'
  *   icon?: React.ReactNode,    Object shown/repeated for each item. Default a plain dot.
  *   count: number,             How many objects to show/count (0-10).
  *   prompt?: string,           Optional instruction shown above the objects.
+ *   audioSrc?: string,         Real recorded narration for `prompt`, if available.
+ *   autoPlay?: boolean,        Narrate `prompt` once automatically. Default true.
  *   interactive?: boolean,     Whether tapping is required to reveal the count. Default true.
  *   showChoices?: boolean,     Whether to ask the child to pick the matching digit. Default true.
  *   choiceSpread?: number,     How far distractor numbers can be from `count`. Default 2.
@@ -36,6 +39,8 @@ export default function CountObjects({
   icon,
   count,
   prompt,
+  audioSrc,
+  autoPlay = true,
   interactive = true,
   showChoices = true,
   choiceSpread = 2,
@@ -82,7 +87,7 @@ export default function CountObjects({
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {prompt && <p className="text-ink-700 max-w-md">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} textClassName="text-ink-700 max-w-md" />}
 
       <div
         className="flex items-center justify-center gap-3 flex-wrap max-w-md min-h-[48px]"

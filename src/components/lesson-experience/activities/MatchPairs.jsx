@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { useEncouragementMessage } from '../encouragement'
+import { AudioInstruction } from '../audio'
 
 /**
  * MatchPairs
@@ -14,10 +15,12 @@ import { useEncouragementMessage } from '../encouragement'
  * @param {{
  *   pairs: { id: string, left: string, right: string }[],  Left/right can be text or emoji.
  *   prompt?: string,
+ *   audioSrc?: string,
+ *   autoPlay?: boolean,
  *   onComplete?: () => void,   Called once every pair is matched.
  * }} props
  */
-export default function MatchPairs({ pairs, prompt, onComplete }) {
+export default function MatchPairs({ pairs, prompt, audioSrc, autoPlay = true, onComplete }) {
   const [matched, setMatched] = useState(() => new Set())
   const [selectedLeft, setSelectedLeft] = useState(null)
   const [shakeIds, setShakeIds] = useState(() => new Set())
@@ -60,7 +63,7 @@ export default function MatchPairs({ pairs, prompt, onComplete }) {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {prompt && <p className="text-ink-700 max-w-md">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
 
       <div className="grid grid-cols-2 gap-4 sm:gap-8 w-full max-w-sm">
         <div className="flex flex-col gap-3">

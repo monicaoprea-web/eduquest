@@ -38,17 +38,14 @@ export default function QuantityToDigitCard({ quantityToDigit, onContinue }) {
 
   return (
     <LessonCardShell>
-      <CardHeading
-        icon="🔢"
-        eyebrow="Cantitate → Cifră"
-        title={quantityToDigit.title ?? 'Ce cifră ne arată câte sunt?'}
-      />
+      <CardHeading icon="🔢" eyebrow="Cantitate → Cifră" />
 
       {round && (
         <CountObjects
           key={roundIndex}
           icon={renderObjectIcon(quantityToDigit.icon ?? 'dot', 'w-8 h-8')}
           count={round.count}
+          prompt={quantityToDigit.prompt ?? 'Ce cifră ne arată câte sunt?'}
           interactive={false}
           onComplete={handleRoundComplete}
         />

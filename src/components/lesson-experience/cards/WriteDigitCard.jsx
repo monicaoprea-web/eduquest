@@ -3,6 +3,7 @@ import LessonCardShell from '../LessonCardShell'
 import CardHeading from '../CardHeading'
 import DigitStrokeDemo from '../activities/DigitStrokeDemo'
 import TraceNumber from '../activities/TraceNumber'
+import { AudioInstruction } from '../audio'
 
 /**
  * WriteDigitCard
@@ -28,7 +29,7 @@ export default function WriteDigitCard({ writeDigit, onContinue }) {
 
       {phase === 'watch' && (
         <>
-          <p className="text-ink-700">Privește cu atenție.</p>
+          <AudioInstruction text="Privește cu atenție." textClassName="text-ink-700" />
           <DigitStrokeDemo character={character} onDone={() => setPhase('guided')} />
         </>
       )}

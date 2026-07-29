@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { soundEffects } from '../soundEffects'
 import { useEncouragementMessage } from '../encouragement'
+import { AudioInstruction } from '../audio'
 
 /**
  * SortObjects
@@ -16,10 +17,12 @@ import { useEncouragementMessage } from '../encouragement'
  *   items: { id: string, icon: string, groupId: string }[],
  *   groups: { id: string, label: string, icon?: string }[],
  *   prompt?: string,
+ *   audioSrc?: string,
+ *   autoPlay?: boolean,
  *   onComplete?: () => void,   Called once every item is correctly sorted.
  * }} props
  */
-export default function SortObjects({ items, groups, prompt, onComplete }) {
+export default function SortObjects({ items, groups, prompt, audioSrc, autoPlay = true, onComplete }) {
   const [placed, setPlaced] = useState({}) // itemId -> groupId
   const [selectedItem, setSelectedItem] = useState(null)
   const [shakeGroup, setShakeGroup] = useState(null)
@@ -53,7 +56,7 @@ export default function SortObjects({ items, groups, prompt, onComplete }) {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {prompt && <p className="text-ink-700 max-w-md">{prompt}</p>}
+      {prompt && <AudioInstruction text={prompt} audioSrc={audioSrc} autoPlay={autoPlay} />}
 
       <div className="flex items-center justify-center gap-3 flex-wrap min-h-16 max-w-md" aria-label="Obiecte de sortat">
         {remaining.map((item) => (
