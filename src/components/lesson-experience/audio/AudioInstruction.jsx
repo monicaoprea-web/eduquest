@@ -15,8 +15,14 @@ import AudioReplayButton from './AudioReplayButton'
  * component and `useLessonAudio` already prefer it over the Speech
  * Synthesis fallback.
  *
+ * `spokenText` lets the narration read more naturally than the shown
+ * text when useful (e.g. spoken "Astăzi descoperim numărul și cifra
+ * zero." vs. a shorter on-screen "Astăzi descoperim cifra 0!"). Omit
+ * it to just speak `text` as written.
+ *
  * @param {{
  *   text: string,
+ *   spokenText?: string,
  *   audioSrc?: string,
  *   autoPlay?: boolean,
  *   replayLabel?: string,
@@ -26,13 +32,14 @@ import AudioReplayButton from './AudioReplayButton'
  */
 export default function AudioInstruction({
   text,
+  spokenText,
   audioSrc,
   autoPlay = true,
   replayLabel = 'Ascultă din nou',
   textClassName = 'font-display font-semibold text-lg text-ink-900',
   align = 'center',
 }) {
-  const { isPlaying, replay } = useLessonAudio({ text, audioSrc, autoPlay })
+  const { isPlaying, replay } = useLessonAudio({ text, spokenText, audioSrc, autoPlay })
 
   if (!text) return null
 

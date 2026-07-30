@@ -108,7 +108,7 @@ export default function CountObjects({
 
       <div
         className="flex items-center justify-center gap-3 flex-wrap max-w-md min-h-[48px]"
-        aria-label="Obiecte de numărat"
+        aria-label={count === 0 ? 'grup gol' : 'Obiecte de numărat'}
       >
         {Array.from({ length: count }).map((_, i) => {
           const isTapped = !interactive || tapped.has(i)
@@ -135,7 +135,6 @@ export default function CountObjects({
             </span>
           )
         })}
-        {count === 0 && <p className="text-ink-700/60 italic text-sm">(niciun obiect)</p>}
       </div>
 
       {(interactive || showChoices) && (

@@ -68,12 +68,15 @@ export default function CompareGroups({
 
   const Group = ({ count, icon, label }) => (
     <div className="flex flex-col items-center gap-3">
-      <div className="flex flex-wrap items-center justify-center gap-2 max-w-[140px]" aria-label={label}>
+      <div
+        className="flex flex-wrap items-center justify-center gap-2 max-w-[140px]"
+        aria-label={count === 0 ? `${label} — grup gol` : label}
+      >
         {Array.from({ length: count }).map((_, i) => (
           <span key={i} className="text-3xl" aria-hidden="true">{icon}</span>
         ))}
       </div>
-      <span className="font-display font-bold text-ink-700/70 text-sm">{count}</span>
+      {count > 0 && <span className="font-display font-bold text-ink-700/70 text-sm">{count}</span>}
     </div>
   )
 

@@ -87,7 +87,7 @@ export default function FindGroup({
               key={group.id}
               onClick={() => choose(group)}
               disabled={answered}
-              aria-label={`Grup cu ${group.count} obiecte`}
+              aria-label={group.count === 0 ? 'grup gol' : `Grup cu ${group.count} obiecte`}
               className={[
                 'min-h-[100px] flex flex-wrap items-center justify-center gap-1.5 content-center rounded-3xl px-3 py-4 ring-2 transition-all duration-200',
                 isCorrect ? 'bg-leaf-50 ring-leaf-400 finger-pop' : 'bg-mist-50 ring-mist-200 hover:ring-ocean-300',
@@ -97,7 +97,6 @@ export default function FindGroup({
               {Array.from({ length: group.count }).map((_, i) => (
                 <span key={i} aria-hidden="true">{group.icon}</span>
               ))}
-              {group.count === 0 && <span className="text-ink-700/40 text-sm italic">gol</span>}
             </button>
           )
         })}

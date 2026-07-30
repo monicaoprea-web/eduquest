@@ -14,13 +14,18 @@ import { speak, stop } from './audioManager'
  * - Stopping its own narration on unmount, so leaving a card mid-speech
  *   doesn't leave it talking over the next one.
  *
- * @param {{ text?: string, audioSrc?: string, autoPlay?: boolean }} options
+ * @param {{ text?: string, spokenText?: string, audioSrc?: string, autoPlay?: boolean }} options
+ *   `spokenText` lets the narration read more naturally than the visible
+ *   text when useful (e.g. "Astăzi descoperim numărul și cifra zero."
+ *   spoken, vs. a shorter on-screen "Astăzi descoperim cifra 0!"). It
+ *   defaults to `text` when not given.
  * @returns {{ isPlaying: boolean, replay: () => void }}
  */
-export function useLessonAudio({ text, audioSrc, autoPlay = true }) {
+export function useLessonAudio({ text, spokenText, audioSrc, autoPlay = true }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const isPlayingRef = useRef(false)
   const firedRef = useRef(false)
+  const toSpeak = spokenText ?? text
 
   const setPlaying = (value) => {
     isPlayingRef.current = value
@@ -28,9 +33,9 @@ export function useLessonAudio({ text, audioSrc, autoPlay = true }) {
   }
 
   const play = () => {
-    if (!text && !audioSrc) return
+    if (!toSpeak && !audioSrc) return
     speak({
-      text,
+      text: toSpeak,
       audioSrc,
       onStart: () => setPlaying(true),
       onEnd: () => setPlaying(false),
@@ -41,7 +46,7 @@ export function useLessonAudio({ text, audioSrc, autoPlay = true }) {
   // autoplay again; the same instruction re-rendering is not.
   useEffect(() => {
     firedRef.current = false
-  }, [text, audioSrc])
+  }, [toSpeak, audioSrc])
 
   useEffect(() => {
     if (autoPlay && !firedRef.current) {
@@ -49,7 +54,7 @@ export function useLessonAudio({ text, audioSrc, autoPlay = true }) {
       play()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, audioSrc, autoPlay])
+  }, [toSpeak, audioSrc, autoPlay])
 
   useEffect(
     () => () => {

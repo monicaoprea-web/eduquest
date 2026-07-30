@@ -38,6 +38,9 @@
  * @property {string[]} [steps]
  * @property {string} [icon]       Emoji representing the activity's items (interactiveActivity only).
  * @property {number} [itemCount]  How many items to interact with (interactiveActivity only).
+ * @property {string} [childNarration]  Short spoken summary for the child (Clasa pregătitoare
+ *                                       non-reader rule) — NOT a read-aloud of `steps`/`description`,
+ *                                       which stay as detailed written text for the accompanying adult.
  *
  * @typedef {Object} Lesson
  * @property {string} id                 Unique slug, e.g. "EQ-CP-MAT-R01"
@@ -56,6 +59,12 @@
  *
  * Content sections — all optional, rendered only when present:
  * @property {string} [intro]                     Short opening hook, shown under the title.
+ * @property {string} [introNarration]             Optional spoken variant of `intro`, if the
+ *                                                  narration should read more naturally than the
+ *                                                  on-screen text (see WelcomeCard). Defaults to `intro`.
+ * @property {string} [objectivesNarration]        Simple spoken summary of `objectives`, for Clasa
+ *                                                  pregătitoare — reading three bullet points aloud
+ *                                                  verbatim usually sounds too formal (see ObjectivesCard).
  * @property {{targetCount: number}} [discover]    Enables the interactive tap-the-hand counting card (Sprint 5).
  * @property {string[]} [objectives]
  * @property {string[]} [materials]                Everyday materials needed for the lesson.

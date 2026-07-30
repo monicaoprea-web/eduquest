@@ -1,0 +1,113 @@
+{
+  "id": "EQ-CP-MAT-N0",
+  "classId": "cp",
+  "className": "Clasa pregătitoare",
+  "subjectId": "matematica",
+  "subjectName": "Matematică și explorarea mediului",
+  "chapterId": "numere",
+  "chapterName": "Numerele naturale de la 0 la 10",
+  "title": "Numărul și cifra 0",
+  "lessonNumber": 4,
+  "totalLessons": 14,
+  "ageRange": "5-6 ani",
+  "durationMinutes": 15,
+  "level": "Ușor",
+  "intro": "Astăzi descoperim cifra 0!",
+  "introNarration": "Astăzi descoperim numărul și cifra zero.",
+  "objectivesNarration": "Astăzi vom descoperi ce înseamnă zero, vom găsi grupuri fără obiecte și vom exersa cifra zero.",
+  "objectives": [
+    "Înțelegem că 0 înseamnă niciun obiect.",
+    "Recunoaștem grupuri goale.",
+    "Trasăm și scriem cifra 0."
+  ],
+  "discoverZero": {
+    "icon": "apple",
+    "startCount": 3,
+    "question": "Câte mere au rămas?",
+    "explanation": "Zero ne arată că nu a mai rămas niciun măr.",
+    "correctText": "Da, acesta este zero.",
+    "hintText": "Coșul este gol."
+  },
+  "quantityToDigit": {
+    "title": "Cantitate → Cifră",
+    "prompt": "Ce cifră arată o cutie goală?",
+    "icon": "dot",
+    "rounds": [{ "count": 0 }]
+  },
+  "findGroup": {
+    "title": "Găsește grupul",
+    "rounds": [
+      {
+        "targetCount": 0,
+        "groups": [
+          { "icon": "apple", "count": 2 },
+          { "icon": "ball", "count": 0 },
+          { "icon": "leaf", "count": 3 }
+        ]
+      },
+      {
+        "targetCount": 0,
+        "groups": [
+          { "icon": "pencil", "count": 1 },
+          { "icon": "apple", "count": 4 },
+          { "icon": "ball", "count": 0 }
+        ]
+      },
+      {
+        "targetCount": 0,
+        "groups": [
+          { "icon": "leaf", "count": 0 },
+          { "icon": "pencil", "count": 2 },
+          { "icon": "apple", "count": 3 }
+        ]
+      },
+      {
+        "targetCount": 0,
+        "groups": [
+          { "icon": "ball", "count": 3 },
+          { "icon": "leaf", "count": 1 },
+          { "icon": "pencil", "count": 0 }
+        ]
+      }
+    ]
+  },
+  "writeDigit": {
+    "character": "0"
+  },
+  "numberWorksheet": {
+    "character": "0"
+  },
+  "offlineActivity": {
+    "title": "Golește cutia",
+    "description": "Cea mai bună descoperire a lui zero se face cu obiecte adevărate, nu pe ecran.",
+    "childNarration": "Ia o cutie și câteva obiecte mici. Pune obiectele în cutie. Scoate-le pe rând și numără. Când cutia rămâne goală, nu mai ai niciun obiect. Asta înseamnă zero.",
+    "materials": ["o cutie sau un bol mic", "3-5 obiecte mici (nasturi, cuburi, pietricele)"],
+    "steps": [
+      "Pune 3-5 obiecte mici într-o cutie.",
+      "Scoate un obiect și numără cu voce tare câte au rămas.",
+      "Continuă până când cutia rămâne goală.",
+      "Întreabă copilul: «Câte obiecte mai sunt în cutie?»"
+    ]
+  },
+  "aroundYou": {
+    "prompt": "Unde vezi ceva gol în jurul tău?",
+    "hints": ["un pahar gol", "o farfurie goală", "un buzunar gol", "o cutie goală"]
+  },
+  "curiosity": {
+    "text": "Zero este un număr special. El ne arată că nu a mai rămas nimic.",
+    "details": "Cifra 0 a fost inventată cu sute de ani în urmă, mult mai târziu decât celelalte cifre. Fără ea, nu am putea scrie numere mari, precum 10 sau 100."
+  },
+  "parentGuide": {
+    "goal": "Copilul înțelege că 0 înseamnă „niciun obiect” și recunoaște, trasează și scrie cifra 0.",
+    "atHome": "Goliți împreună o cutie sau un pahar, obiect cu obiect, și numărați cu voce tare de fiecare dată.",
+    "goodQuestion": "Ce altceva mai este gol în casă?"
+  },
+  "teacherNotes": [
+    "Aceasta este prima lecție focalizată din unitatea „Numerele naturale de la 0-10”; cifra 0 e predată a patra, după 1, 2 și 3, ca să existe deja un simț al cantității înainte de a introduce absența acesteia.",
+    "Zero este introdus narativ (îndepărtare fizică, unu câte unu), nu ca simplu flashcard — vezi secțiunea discoverZero.",
+    "Feedback-ul pentru răspuns corect/greșit este rostit cu voce tare (nu doar afișat), conform regulii globale a Lesson Engine; al doilea răspuns greșit la «Găsește grupul gol» primește un indiciu specific («Privește grupul gol.»).",
+    "Fișa de lucru (numberWorksheet) este implementarea de referință a familiei „Fișă — Numărul și cifra X”; nu reutilizează mecanic structura lecțiilor 1-9, fiind adaptată conceptului de mulțime vidă."
+  ],
+  "summary": "Ai descoperit cifra 0 — ea ne arată că nu a mai rămas niciun obiect. Ai găsit grupuri goale și ai scris pentru prima dată cifra 0!",
+  "completionMessage": "Ai terminat lecția despre cifra 0!"
+}

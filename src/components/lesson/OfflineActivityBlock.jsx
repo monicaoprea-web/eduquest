@@ -1,3 +1,5 @@
+import { AudioInstruction } from '../lesson-experience/audio'
+
 /**
  * OfflineActivityBlock
  * Renders a hands-on, screen-free activity: title, optional materials
@@ -5,13 +7,21 @@
  * Reused for both `offlineActivity` (steps-based) and
  * `montessoriInspiredActivity` (description-based) on the lesson page.
  *
+ * The materials/steps stay as detailed written text for the
+ * accompanying adult. `childNarration`, when given, adds a short,
+ * spoken (and visibly highlighted) summary aimed at the child — the
+ * Clasa pregătitoare non-reader rule for offline activity instructions.
+ * It's a plain short sentence, not the long adult instructions read
+ * verbatim.
+ *
  * @param {{
- *   activity: { title: string, materials?: string[], steps?: string[], description?: string },
+ *   activity: { title: string, materials?: string[], steps?: string[], description?: string, childNarration?: string },
  *   icon?: string,
  *   label?: string,
  *   accent?: 'leaf' | 'ocean'
  * }} props
  */
+
 const ACCENTS = {
   leaf: { ring: 'ring-leaf-100', badge: 'bg-leaf-50', chip: 'bg-leaf-500' },
   ocean: { ring: 'ring-ocean-100', badge: 'bg-ocean-50', chip: 'bg-ocean-500' },
@@ -34,6 +44,16 @@ export default function OfflineActivityBlock({ activity, icon = '🖐️', label
           <h3 className="font-display font-bold text-lg text-ink-900">{activity.title}</h3>
         </div>
       </div>
+
+      {activity.childNarration && (
+        <div className={`mt-4 rounded-2xl ${colors.badge} px-4 py-3.5`}>
+          <AudioInstruction
+            text={activity.childNarration}
+            align="left"
+            textClassName="text-ink-900 font-semibold text-[15px] leading-relaxed"
+          />
+        </div>
+      )}
 
       {activity.description && (
         <p className="text-ink-700 leading-relaxed mt-4">{activity.description}</p>

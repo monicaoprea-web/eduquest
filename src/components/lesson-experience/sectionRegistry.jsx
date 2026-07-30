@@ -53,14 +53,14 @@ export const SECTION_REGISTRY = [
     key: 'welcome',
     isPresent: () => true, // title is always required
     render: (lesson, ctx) => (
-      <WelcomeCard title={lesson.title} intro={lesson.intro} onStart={ctx.next} />
+      <WelcomeCard title={lesson.title} intro={lesson.intro} narration={lesson.introNarration} onStart={ctx.next} />
     ),
   },
   {
     key: 'objectives',
     isPresent: (lesson) => lesson.objectives?.length > 0,
     render: (lesson, ctx) => (
-      <ObjectivesCard objectives={lesson.objectives} onContinue={ctx.next} />
+      <ObjectivesCard objectives={lesson.objectives} narration={lesson.objectivesNarration} onContinue={ctx.next} />
     ),
   },
   {

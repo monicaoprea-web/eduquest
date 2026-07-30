@@ -1,5 +1,6 @@
 import LessonCardShell from '../LessonCardShell'
 import ContinueButton from '../ContinueButton'
+import { AudioInstruction } from '../audio'
 
 /**
  * WelcomeCard
@@ -8,9 +9,18 @@ import ContinueButton from '../ContinueButton'
  * fallback text is generated — if `intro` is missing, the card simply
  * shows the title on its own.
  *
- * @param {{ title: string, intro?: string, onStart: () => void }} props
+ * The intro is narrated automatically (Clasa pregătitoare non-reader
+ * rule — a lesson's opening card must be understandable without
+ * reading). `narration` lets the spoken phrasing read a little more
+ * naturally than the shorter on-screen `intro` when useful; it falls
+ * back to `intro` when not given. The title itself isn't narrated —
+ * it's effectively repeated by the intro/narration and by the
+ * breadcrumbs/header above the card, so speaking it again would be
+ * over-narrating decorative UI.
+ *
+ * @param {{ title: string, intro?: string, narration?: string, onStart: () => void }} props
  */
-export default function WelcomeCard({ title, intro, onStart }) {
+export default function WelcomeCard({ title, intro, narration, onStart }) {
   return (
     <LessonCardShell>
       <span className="text-6xl" aria-hidden="true">🎒</span>
@@ -18,9 +28,11 @@ export default function WelcomeCard({ title, intro, onStart }) {
         {title}
       </h1>
       {intro && (
-        <p className="text-xl text-ink-700 max-w-md leading-relaxed">
-          {intro}
-        </p>
+        <AudioInstruction
+          text={intro}
+          spokenText={narration}
+          textClassName="text-xl text-ink-700 max-w-md leading-relaxed"
+        />
       )}
       <ContinueButton onClick={onStart}>Start</ContinueButton>
     </LessonCardShell>
