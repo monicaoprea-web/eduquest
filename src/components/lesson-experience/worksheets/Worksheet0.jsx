@@ -100,7 +100,7 @@ export default function Worksheet0({ inkSaving = false }) {
 function BigZero({ inkSaving }) {
   const stroke = inkSaving ? '#1a2036' : '#2f6fed'
   return (
-    <svg viewBox="0 0 200 220" className="w-[34mm] h-[37mm] flex-none" aria-hidden="true">
+    <svg viewBox="0 0 200 220" className="w-[30mm] h-[33mm] flex-none" aria-hidden="true">
       <path
         d="M100 40C130 40 150 72 150 110C150 148 130 180 100 180C70 180 50 148 50 110C50 72 70 40 100 40Z"
         fill="none"
@@ -117,7 +117,7 @@ function BigZero({ inkSaving }) {
 function TracingZero({ strength, inkSaving }) {
   const stroke = inkSaving ? '#1a2036' : '#2f6fed'
   return (
-    <svg viewBox="0 0 100 120" className="w-[14mm] h-[17mm] flex-none" aria-hidden="true">
+    <svg viewBox="0 0 100 120" className="w-[12mm] h-[14mm] flex-none" aria-hidden="true">
       <ellipse
         cx="50"
         cy="60"
@@ -134,7 +134,7 @@ function TracingZero({ strength, inkSaving }) {
 }
 
 function EmptyBox({ inkSaving, small = false }) {
-  const size = small ? 'w-[12mm] h-[12mm]' : 'w-[18mm] h-[18mm]'
+  const size = small ? 'w-[10mm] h-[10mm]' : 'w-[16mm] h-[16mm]'
   const stroke = inkSaving ? '#1a2036' : '#f2711a'
   return (
     <svg viewBox="0 0 100 100" className={`${size} flex-none`} aria-hidden="true">
@@ -146,7 +146,7 @@ function EmptyBox({ inkSaving, small = false }) {
 function ObjectGroup({ count, inkSaving }) {
   return (
     <div
-      className="flex flex-none flex-wrap items-center justify-center gap-1.5 w-[20mm] h-[20mm] rounded-[3mm] p-1.5"
+      className="flex flex-none flex-wrap items-center justify-center gap-1.5 w-[17mm] h-[17mm] rounded-[3mm] p-1.5"
       style={{ border: '1.5pt solid #d1d5db' }}
       aria-label={count === 0 ? 'grup gol' : `grup cu ${count} obiecte`}
     >

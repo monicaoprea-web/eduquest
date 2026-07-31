@@ -204,13 +204,13 @@ h1, h2, h3, h4 {
   min-height: 297mm;
   max-height: 297mm;
   margin: 0 auto;
-  padding: 10mm;
+  padding: 8mm;
   background: #ffffff;
   color: #1a2036;
   font-family: var(--font-body);
   display: flex;
   flex-direction: column;
-  gap: 5mm;
+  gap: 4mm;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -219,12 +219,12 @@ h1, h2, h3, h4 {
   align-items: baseline;
   justify-content: space-between;
   border-bottom: 1.5pt solid #e2e7f0;
-  padding-bottom: 3mm;
+  padding-bottom: 2mm;
 }
 .worksheet-brand {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 13pt;
+  font-size: 12pt;
   color: #2f6fed;
 }
 .worksheet-a4.worksheet-ink-saving .worksheet-brand {
@@ -236,35 +236,35 @@ h1, h2, h3, h4 {
 .worksheet-titles h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 17pt;
+  font-size: 15pt;
   margin: 0;
   line-height: 1.1;
 }
 .worksheet-titles p {
-  font-size: 9pt;
+  font-size: 8pt;
   color: #2b3350;
-  margin: 1mm 0 0;
+  margin: 0.5mm 0 0;
 }
 .worksheet-body {
   display: flex;
   flex-direction: column;
-  gap: 4mm;
+  gap: 3mm;
   flex: 1;
   min-height: 0;
 }
 .worksheet-footer {
   border-top: 1pt solid #e2e7f0;
-  padding-top: 2mm;
-  font-size: 7.5pt;
+  padding-top: 1.5mm;
+  font-size: 7pt;
   color: #6b7280;
   text-align: center;
 }
 .worksheet-section-label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 10pt;
+  font-size: 9.5pt;
   color: #2f6fed;
-  margin-bottom: 1.5mm;
+  margin-bottom: 1mm;
   display: block;
 }
 .worksheet-a4.worksheet-ink-saving .worksheet-section-label {
@@ -272,8 +272,8 @@ h1, h2, h3, h4 {
 }
 .worksheet-writing-line {
   border-bottom: 1pt dashed #9ca3af;
-  height: 14mm;
+  height: 11mm;
 }
 .worksheet-writing-line + .worksheet-writing-line {
-  margin-top: 3mm;
+  margin-top: 2mm;
 }
